@@ -1,8 +1,3 @@
-// Con una chiamata ajax, recuperare i dischi musicali restituiti dall'api:
-// https://flynn.boolean.careers/exercises/api/array/music
-// Ciclare quindi i dischi e ottenuti e per ognuno di essi disegnare in pagina una card utilizzando handlebars.
-
-
 $(document).ready(function() {
     //recupero la struttura html del template
     var template_html = $("#card-cd").html();
@@ -20,31 +15,36 @@ $(document).ready(function() {
                 var cd_corrente = dischi[i];
                 //creo un oggetto con i dati del singolo cd per compilare il placeholder di Handlebars
                 var disco = {
-                    "src" : cd_corrente.poster,
+                    "image" : cd_corrente.poster,
                     "titolo" : cd_corrente.title,
                     "autore" : cd_corrente.author,
                     "anno" : cd_corrente.year,
-                    "genere" : cd_corrente.genre
+                    "genere" : cd_corrente.genre.toLowerCase()
                 }
                 //inserisco le proprietà dell'oggetto nella funzione Handlebars
                 var html_finale = template_function(disco);
                 //insericso i dischi nell html
                 $(".cds-container").append(html_finale)
             }
-            //BONUS
-            //intercetto il cambio di genere nell'elemento select
-            $("#genre-select").change(function() {
-                //al cambio genere rimuovo la classe active a tutti i dischi
-                $(".cd").removeClass("active");
-                //salvo il valore del genere selezionato
-                var genere_sel = $(this).val();
-                //seleziono i cd con il data-genere uguale a quello selezionato dal select
-                var ciao =$(".cd[data-genere='" + genere_sel + "']").addClass("active");
-                console.log(ciao);
-            })
         },
         "error": function() {
             alert("Si è verificato un errore")
+        }
+    })
+
+    //BONUS
+    //intercetto il cambio di genere nell'elemento select
+    $("#genre-select").change(function() {
+        //salvo il valore del genere selezionato
+        var genere_sel = $(this).val();
+        //al cambio genere rimuovo la classe active a tutti i dischi
+        $(".cd").removeClass("active");
+        //se viene selezionato "all" nel select, visualizzo tutti i dischi
+        if (genere_sel == "all") {
+            $(".cd").addClass("active")
+        } else {
+            //altrimenti seleziono i cd con il data-genere uguale a quello selezionato dal select
+            $(".cd[data-genere='" + genere_sel + "']").addClass("active");
         }
     })
 });

@@ -15,6 +15,7 @@
                 <div class="select-container">
                     <label for="generi">Seleziona un genere:</label>
                     <select id="genre-select">
+                        <option value="all">All</option>
                         <option value="rock">Rock</option>
                         <option value="pop">Pop</option>
                         <option value="jazz">Jazz</option>
@@ -27,7 +28,7 @@
         <!-- template con handlebars -->
         <script id="card-cd" type="text/x-handlebars-template">
             <div class="cd active" data-genere="{{genere}}">
-                <img src="{{src}}" alt="">
+                <img src="{{image}}" alt="">
                 <h3>{{titolo}}</h3>
                 <span class="author">{{autore}}</span>
                 <span class="year">{{anno}}</span>
