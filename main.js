@@ -13,13 +13,11 @@ $(document).ready(function() {
         "url": "https://flynn.boolean.careers/exercises/api/array/music",
         "method": "GET",
         "success": function(data) {
-            console.log(data);
             var dischi = data.response;
             // console.log(data.response[3]);
             for (var i = 0; i < dischi.length; i++) {
                 //salvo il cd corrente
                 var cd_corrente = dischi[i];
-                console.log(cd_corrente);
                 //creo un oggetto con i dati del singolo cd per compilare il placeholder di Handlebars
                 var disco = {
                     "src" : cd_corrente.poster,
@@ -28,11 +26,22 @@ $(document).ready(function() {
                     "anno" : cd_corrente.year,
                     "genere" : cd_corrente.genre
                 }
-                //inserisco nella funzione di handlebars i dati dell'oggetto
-                var html_finale = template_function(disco)
-                //inserisco in pagina il disco cd_corrente
+                //inserisco le proprietà dell'oggetto nella funzione Handlebars
+                var html_finale = template_function(disco);
+                //insericso i dischi nell html
                 $(".cds-container").append(html_finale)
             }
+            //BONUS
+            //intercetto il cambio di genere nell'elemento select
+            $("#genre-select").change(function() {
+                //al cambio genere rimuovo la classe active a tutti i dischi
+                $(".cd").removeClass("active");
+                //salvo il valore del genere selezionato
+                var genere_sel = $(this).val();
+                //seleziono i cd con il data-genere uguale a quello selezionato dal select
+                var ciao =$(".cd[data-genere='" + genere_sel + "']").addClass("active");
+                console.log(ciao);
+            })
         },
         "error": function() {
             alert("Si è verificato un errore")

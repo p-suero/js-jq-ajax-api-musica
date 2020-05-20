@@ -11,13 +11,22 @@
     <body>
         <header>
             <div class="container">
-                <img src="logo.png" alt="logo" />
+                <img src="logo.png" alt="logo">
+                <div class="select-container">
+                    <label for="generi">Seleziona un genere:</label>
+                    <select id="genre-select">
+                        <option value="rock">Rock</option>
+                        <option value="pop">Pop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="metal">Metal</option>
+                    </select>
+                </div>
             </div>
         </header>
         <div class="cds-container container"></div>
         <!-- template con handlebars -->
         <script id="card-cd" type="text/x-handlebars-template">
-            <div class="cd">
+            <div class="cd active" data-genere="{{genere}}">
                 <img src="{{src}}" alt="">
                 <h3>{{titolo}}</h3>
                 <span class="author">{{autore}}</span>
