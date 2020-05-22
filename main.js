@@ -14,7 +14,7 @@ $(document).ready(function() {
                 //salvo il cd corrente
                 var cd_corrente = dischi[i];
                 //creo un oggetto con i dati del singolo cd per compilare il placeholder di Handlebars
-                var disco = {
+                var context = {
                     "image" : cd_corrente.poster,
                     "titolo" : cd_corrente.title,
                     "autore" : cd_corrente.author,
@@ -22,7 +22,7 @@ $(document).ready(function() {
                     "genere" : cd_corrente.genre.toLowerCase()
                 }
                 //inserisco le proprietà dell'oggetto nella funzione Handlebars
-                var html_finale = template_function(disco);
+                var html_finale = template_function(context);
                 //insericso i dischi nell html
                 $(".cds-container").append(html_finale)
             }
