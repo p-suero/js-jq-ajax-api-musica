@@ -8,24 +8,7 @@ $(document).ready(function() {
         "url": "https://flynn.boolean.careers/exercises/api/array/music",
         "method": "GET",
         "success": function(data) {
-            var dischi = data.response;
-            // console.log(data.response[3]);
-            for (var i = 0; i < dischi.length; i++) {
-                //salvo il cd corrente
-                var cd_corrente = dischi[i];
-                //creo un oggetto con i dati del singolo cd per compilare il placeholder di Handlebars
-                var context = {
-                    "image" : cd_corrente.poster,
-                    "titolo" : cd_corrente.title,
-                    "autore" : cd_corrente.author,
-                    "anno" : cd_corrente.year,
-                    "genere" : cd_corrente.genre.toLowerCase()
-                }
-                //inserisco le proprietà dell'oggetto nella funzione Handlebars
-                var html_finale = template_function(context);
-                //insericso i dischi nell html
-                $(".cds-container").append(html_finale)
-            }
+            gestisci_dati(data)
         },
         "error": function() {
             alert("Si è verificato un errore")
@@ -49,4 +32,32 @@ $(document).ready(function() {
             $(".cd").addClass("active");
         }
     })
+
+    //FUNZIONI
+    function gestisci_dati(disco) {
+        //recupero l'oggetto contenente i dischi nell'API
+        var dischi = disco.response;
+        // console.log(data.response[3]);
+        for (var i = 0; i < dischi.length; i++) {
+            //salvo il cd corrente
+            var cd_corrente = dischi[i];
+            //aggiungo i cd in pagina html
+            aggiungi_disco(cd_corrente)
+        }
+    }
+
+    function aggiungi_disco(cd) {
+        //creo un oggetto con i dati del singolo cd per compilare il placeholder di Handlebars
+        var context = {
+            "image" : cd.poster,
+            "titolo" : cd.title,
+            "autore" : cd.author,
+            "anno" : cd.year,
+            "genere" : cd.genre.toLowerCase()
+        }
+        //inserisco le proprietà dell'oggetto nella funzione Handlebars
+        var html_finale = template_function(context);
+        //insericso i dischi nell html
+        $(".cds-container").append(html_finale)
+    }
 });
