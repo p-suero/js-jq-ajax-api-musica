@@ -37,14 +37,16 @@ $(document).ready(function() {
     $("#genre-select").change(function() {
         //salvo il valore del genere selezionato
         var genere_sel = $(this).val();
-        //al cambio genere rimuovo la classe active a tutti i dischi
-        $(".cd").removeClass("active");
-        //se viene selezionato "all" nel select, visualizzo tutti i dischi
-        if (genere_sel == "all") {
-            $(".cd").addClass("active")
-        } else {
+        //se viene selezionato un genere nel select, visualizzo i dischi per genere
+        if (genere_sel != "") {
+            //rimuovo i dischi visualizzati
+            $(".cd").removeClass("active");
             //altrimenti seleziono i cd con il data-genere uguale a quello selezionato dal select
             $(".cd[data-genere='" + genere_sel + "']").addClass("active");
+
+        } else {
+            //altrimenti visualizzo tutti i dischi
+            $(".cd").addClass("active");
         }
     })
 });
