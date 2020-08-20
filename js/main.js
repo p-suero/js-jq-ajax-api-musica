@@ -8,10 +8,10 @@ $(document).ready(function() {
         "url": "https://flynn.boolean.careers/exercises/api/array/music",
         "method": "GET",
         "success": function(data) {
-            gestisci_dati(data)
+            gestisci_dati(data);
         },
         "error": function() {
-            alert("Si è verificato un errore")
+            alert("Si è verificato un errore");
         }
     })
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
             //salvo il cd corrente
             var cd_corrente = dischi[i];
             //aggiungo i cd in pagina html
-            aggiungi_disco(cd_corrente)
+            aggiungi_disco(cd_corrente);
         }
     }
 
@@ -58,6 +58,6 @@ $(document).ready(function() {
         //inserisco le proprietà dell'oggetto nella funzione Handlebars
         var html_finale = template_function(context);
         //insericso i dischi nell html
-        $(".cds-container").append(html_finale)
+        $(".cds-container").append(html_finale);
     }
 });
