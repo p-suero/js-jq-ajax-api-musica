@@ -54,7 +54,7 @@ $(document).ready(function() {
             "autore" : cd.author,
             "anno" : cd.year,
             "genere" : cd.genre.toLowerCase()
-        }
+        };
         //inserisco le proprietà dell'oggetto nella funzione Handlebars
         var html_finale = template_function(context);
         //insericso i dischi nell html
